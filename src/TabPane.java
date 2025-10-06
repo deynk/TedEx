@@ -174,4 +174,17 @@ public class TabPane extends JTabbedPane {
     public void redo(){
         fileEdits.get(getSelectedIndex()).redoChange();
     }
+
+    public void copy(){
+        fileEdits.get(getSelectedIndex()).text.copy();
+    }
+    public void cut(){
+        fileEdits.get(getSelectedIndex()).text.cut();
+    }
+    public void paste(){
+        fileEdits.get(getSelectedIndex()).text.paste();
+    }
+    public void selectAll(){
+        fileEdits.get(getSelectedIndex()).text.selectAll();
+    }
 }

@@ -43,4 +43,39 @@ public class Form {
         frame.setLocationRelativeTo(null);
         return frame;
     }
+
+    public static void setTheme(String theme){
+        try{
+            switch (theme)
+            {
+                case "default":
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    break;
+
+                case "windows":
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                    break;
+
+                case "windowsClassic":
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
+                    break;
+
+                case "metal":
+                    UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+                    break;
+
+                case "motif":
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+                    break;
+
+                case "nimbus":
+                    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+                    break;
+            }
+            SwingUtilities.updateComponentTreeUI(frame);
+        }catch(Exception e){
+            System.out.println("Can't set theme");
+            e.printStackTrace();
+        }
+    }
 }

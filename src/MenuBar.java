@@ -74,6 +74,10 @@ public class MenuBar  extends JMenuBar{
         // ActionListeners...
         undo.addActionListener(e -> {Form.tabs.undo();});
         redo.addActionListener(e -> {Form.tabs.redo();});
+        copy.addActionListener((_) -> {Form.tabs.copy();});
+        cut.addActionListener((_) -> {Form.tabs.cut();});
+        paste.addActionListener((_) -> {Form.tabs.paste();});
+        selectAll.addActionListener((_) -> {Form.tabs.selectAll();});
 
         return editMenu;
     }
@@ -102,6 +106,23 @@ public class MenuBar  extends JMenuBar{
         JMenuItem quit = new JMenuItem("Quit");
         quit.setToolTipText("Close the program");
 
+        JMenuItem theme = new JMenu("Theme");
+        theme.setMnemonic(KeyEvent.VK_T);
+        theme.setToolTipText("Change the theme");
+
+        JMenuItem defaultTheme = new JMenuItem("Default");
+        defaultTheme.setToolTipText("Change to the default theme");
+        JMenuItem windowsTheme = new JMenuItem("Windows");
+        windowsTheme.setToolTipText("Change the windows theme");
+        JMenuItem windowsClassicTheme = new JMenuItem("Windows Classic");
+        windowsClassicTheme.setToolTipText("Change the Windows Classic Theme");
+        JMenuItem metalTheme = new JMenuItem("Metal");
+        metalTheme.setToolTipText("Change the Metal theme");
+        JMenuItem motifTheme = new JMenuItem("Motif");
+        motifTheme.setToolTipText("Change the Motif theme");
+        JMenuItem nimbusTheme = new JMenuItem("Nimbus");
+        nimbusTheme.setToolTipText("Change the Nimbus theme");
+
 
 
         fileMenu.add(newFile);
@@ -109,6 +130,15 @@ public class MenuBar  extends JMenuBar{
         fileMenu.add(save);
         fileMenu.add(saveIn);
         fileMenu.add(closeCurrentFile);
+
+        fileMenu.add(theme);
+        theme.add(defaultTheme);
+        theme.add(windowsTheme);
+        theme.add(windowsClassicTheme);
+        theme.add(metalTheme);
+        theme.add(motifTheme);
+        theme.add(nimbusTheme);
+
         fileMenu.addSeparator();
         fileMenu.add(quit);
 
@@ -121,6 +151,15 @@ public class MenuBar  extends JMenuBar{
         saveIn.addActionListener((_) -> {Form.tabs.saveFileIn();});
         closeCurrentFile.addActionListener((_) -> { Form.tabs.closeCurrentFile();});
         quit.addActionListener(e -> {System.exit(0);});
+
+        defaultTheme.addActionListener((_) -> {Form.setTheme("default");});
+        windowsTheme.addActionListener((_) -> {Form.setTheme("windows");});
+        windowsClassicTheme.addActionListener((_) -> {Form.setTheme("windowsClassic");});
+        metalTheme.addActionListener((_) -> {Form.setTheme("metal");});
+        motifTheme.addActionListener((_) -> {Form.setTheme("motif");});
+        nimbusTheme.addActionListener((_) -> {Form.setTheme("nimbus");});
+
+
 
         return fileMenu;
     }
