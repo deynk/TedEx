@@ -31,6 +31,10 @@ public class MenuBar  extends JMenuBar{
         helpMenu.addSeparator();
         helpMenu.add(help);
 
+
+        // ActionListeners...
+        aboutMenuItem.addActionListener((_) -> {Dialog.about();});
+
         return helpMenu;
     }
 

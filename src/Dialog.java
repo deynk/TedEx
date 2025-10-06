@@ -47,4 +47,24 @@ public class Dialog {
         if(auxiliar) return name.getText();
         else return null;
     }
+
+    public static void about(){
+        JDialog dialog = new JDialog();
+        dialog.setTitle("About");
+        dialog.setLayout(new FlowLayout());
+
+        dialog.add(new JLabel("TexEd  ------------------  v1.0"), BorderLayout.CENTER);
+        dialog.add(new JLabel(" "), BorderLayout.CENTER);
+        dialog.add(new JLabel("TexEd is a simple text editor made for editing file text"), BorderLayout.CENTER);
+        dialog.add(new JLabel("It doesn't have nothing special, it's a simple text editor"), BorderLayout.CENTER);
+        dialog.add(new JPanel(), BorderLayout.CENTER);
+        dialog.add(new JLabel("Is developed by Dani (aka Deynk)"));
+
+        dialog.setSize(400, 150);
+        dialog.setResizable(false);
+        dialog.setModal(true);
+        dialog.setLocationRelativeTo(null);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+    }
 }
