@@ -111,8 +111,8 @@ public class TabPane extends JTabbedPane {
 
             saver.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             saver.setDialogType(JFileChooser.OPEN_DIALOG);
-            saver.showOpenDialog(null);
-            if(saver.getSelectedFile() != null){
+            int result = saver.showOpenDialog(null);
+            if(saver.getSelectedFile() != null && result == JFileChooser.APPROVE_OPTION){
                 File f = new File(saver.getSelectedFile().getAbsolutePath(), nameOfFile);
                 try(BufferedWriter br = new BufferedWriter(new FileWriter(f, false))){
                     br.write(fileEdits.get(getSelectedIndex()).text.getText());
@@ -124,6 +124,7 @@ public class TabPane extends JTabbedPane {
                 fileEdits.get(getSelectedIndex()).name = nameOfFile;
                 fileEdits.get(getSelectedIndex()).path = (new File(saver.getSelectedFile().getAbsolutePath(), nameOfFile)).getAbsolutePath();
             }
+            else return;
         }
         else{
             File f = new File(fileEdits.get(getSelectedIndex()).path);

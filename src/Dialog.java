@@ -33,6 +33,7 @@ public class Dialog {
             // Tells to submit the name
             auxiliar = true;
         });
+        dialog.getRootPane().setDefaultButton(ok);
         cancel.addActionListener((_) -> {dialog.dispose(); });
 
 
