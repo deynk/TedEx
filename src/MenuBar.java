@@ -87,7 +87,7 @@ public class MenuBar  extends JMenuBar{
     }
 
     public JMenu setFileMenu(){
-        fileMenu = new JMenu("Menu");
+        fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
 
 
