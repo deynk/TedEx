@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Login {
@@ -28,6 +29,7 @@ public class Login {
     }
     private static JDialog setLoginPanel(){
         JDialog dialog = new JDialog();
+        List<Object> languageComponents = new ArrayList<>();
 
         JPanel panel = new JPanel();
         GridBagLayout grid = new GridBagLayout();
@@ -43,7 +45,7 @@ public class Login {
         panel.add(lblUsername, gbc);
             lblUsername.setName("login.lbl.username");
             lblUsername.putClientProperty("tooltip", "login.lbl.username.tooltip");
-            LanguageManager.addComponent(lblUsername);
+            languageComponents.add(lblUsername);
 
 
         gbc.gridx = 1;
@@ -53,7 +55,7 @@ public class Login {
         panel.add(username, gbc);
             username.setName("login.username");
             username.putClientProperty("tooltip", "login.username.tooltip");
-            LanguageManager.addComponent(username);
+            languageComponents.add(username);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -62,7 +64,7 @@ public class Login {
         panel.add(lblPassword, gbc);
             lblPassword.setName("login.lbl.password");
             lblPassword.putClientProperty("tooltip", "login.lbl.password.tooltip");
-            LanguageManager.addComponent(lblPassword);
+            languageComponents.add(lblPassword);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -71,7 +73,7 @@ public class Login {
         panel.add(password, gbc);
             password.setName("login.password");
             password.putClientProperty("tooltip", "login.password.tooltip");
-            LanguageManager.addComponent(password);
+            languageComponents.add(password);
 
         password.addFocusListener(new  FocusListener() {
 
@@ -105,12 +107,12 @@ public class Login {
         panel.add(loginButton, gbc);
             loginButton.setName("login.button");
             loginButton.putClientProperty("tooltip", "login.button.tooltip");
-            LanguageManager.addComponent(loginButton);
+            languageComponents.add(loginButton);
 
 
                 DialogPropertySaver errorLoginDialog = new DialogPropertySaver();
                 errorLoginDialog.setName("login.dialog.error");
-                LanguageManager.addComponent(errorLoginDialog);
+                languageComponents.add(errorLoginDialog);
         loginButton.addActionListener(e -> {
             user = User.findLogin(username.getText(), new String(password.getPassword()), users);
             if(user != null){
@@ -128,13 +130,13 @@ public class Login {
 
         dialog.setTitle("Login");
             dialog.setName("login.dialog");
-            LanguageManager.addDialog(dialog);
+            languageComponents.add(dialog);
         dialog.setModal(true);
         dialog.setSize(450, 300);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(true);
 
-        LanguageManager.update();
+        LanguageManager.updateComponents(languageComponents);
 
         return dialog;
     }

@@ -30,7 +30,7 @@ public class TabPane extends JTabbedPane {
     }
 
     public void createNewFile(){
-        add("New File", setTextEditor(null,null));
+        add(LanguageManager.resourceBundle.getString("tabPane.newFile.name.value"), setTextEditor(null,null));
     }
 
     public void createNewFile(File file){
@@ -98,7 +98,11 @@ public class TabPane extends JTabbedPane {
             return sb.toString();
             //return reader.readAllAsString();
         }catch(Exception e){
-            Dialog.Error(null, "Can't read file");
+            DialogPropertySaver errorReadFileDialog = new DialogPropertySaver();
+            errorReadFileDialog.setName("tabPane.errorReadFileDialog");
+            LanguageManager.addComponent(errorReadFileDialog);
+
+            Dialog.Error(errorReadFileDialog.title, errorReadFileDialog.message);
         }
         return null;
     }
@@ -124,7 +128,10 @@ public class TabPane extends JTabbedPane {
                 try(BufferedWriter br = new BufferedWriter(new FileWriter(f, false))){
                     br.write(fileEdits.get(getSelectedIndex()).text.getText());
                 }catch(Exception e){
-                    Dialog.Error(null, "Can't save file");
+                    DialogPropertySaver errorSaveFileDialog = new DialogPropertySaver();
+                    errorSaveFileDialog.setName("tabPane.errorSaveFileDialog");
+                    LanguageManager.addComponent(errorSaveFileDialog);
+                    Dialog.Error(errorSaveFileDialog.title, errorSaveFileDialog.message);
                     e.printStackTrace();
                     return;
                 }
@@ -138,7 +145,10 @@ public class TabPane extends JTabbedPane {
             try(BufferedWriter br = new BufferedWriter(new FileWriter(f, false))){
                 br.write(fileEdits.get(getSelectedIndex()).text.getText());
             }catch(Exception e){
-                Dialog.Error(null, "Can't save file");
+                DialogPropertySaver errorSaveFileDialog = new DialogPropertySaver();
+                errorSaveFileDialog.setName("tabPane.errorSaveFileDialog");
+                LanguageManager.addComponent(errorSaveFileDialog);
+                Dialog.Error(errorSaveFileDialog.title, errorSaveFileDialog.message);
                 e.printStackTrace();
             }
         }
@@ -164,7 +174,10 @@ public class TabPane extends JTabbedPane {
             try(BufferedWriter br = new BufferedWriter(new FileWriter(f, false))){
                 br.write(fileEdits.get(getSelectedIndex()).text.getText());
             }catch(Exception e){
-                Dialog.Error(null, "Can't save file");
+                DialogPropertySaver errorSaveFileDialog = new DialogPropertySaver();
+                errorSaveFileDialog.setName("tabPane.errorSaveFileDialog");
+                LanguageManager.addComponent(errorSaveFileDialog);
+                Dialog.Error(errorSaveFileDialog.title, errorSaveFileDialog.message);
                 e.printStackTrace();
                 return;
             }

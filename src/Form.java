@@ -16,6 +16,7 @@ public class Form {
         //Login.login();
 
         frame.setVisible(true);
+        LanguageManager.update();
 
 
         // Avoid closing the app with unsaved files
