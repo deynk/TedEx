@@ -26,21 +26,42 @@ public class Dialog {
         auxiliar = false;
         JDialog dialog = new JDialog();
         dialog.setTitle("Insert name for the file");
+            dialog.setName("getFileName.dialog");
+            LanguageManager.addDialog(dialog);
         dialog.setLayout(new GridLayout(2,2));
 
-        dialog.add(new JLabel("  Insert the name of the file:"), BorderLayout.CENTER);
+        JLabel lblName = new JLabel("  Enter the name of the file:");
+        lblName.setToolTipText("Enter the name of the file");
+        dialog.add(lblName, BorderLayout.CENTER);
+            lblName.putClientProperty("tooltip", "getFileName.lblName.tooltip");
+            lblName.setName("getFileName.lblName");
+            LanguageManager.addComponent(lblName);
+
 
         JTextField name = new JTextField(fileName);
         dialog.add(name);
-        JButton ok = new JButton("Submit");
+        JButton ok = new JButton("Create file");
+        ok.setToolTipText("Create file");
+            ok.setName("getFileName.button.ok");
+            ok.putClientProperty("tooltip", "getFileName.button.ok.tooltip");
+            LanguageManager.addComponent(ok);
+
         JButton cancel = new JButton("Cancel");
+        cancel.setToolTipText("Cancel");
+            cancel.setName("getFileName.button.cancel");
+            cancel.putClientProperty("tooltip", "getFileName.button.cancel.tooltip");
+            LanguageManager.addComponent(cancel);
 
         dialog.add(ok);
         dialog.add(cancel);
 
+        DialogPropertySaver warningGetFileName = new DialogPropertySaver();
+        warningGetFileName.setName("getFileName.warning");
+        LanguageManager.addComponent(warningGetFileName);
+
         ok.addActionListener((_) -> {
             if(name.getText().equals("") || name.getText().isBlank()){
-                Warning("Name is empty!", "Please, insert a name for the file!");
+                Warning(warningGetFileName.title, warningGetFileName.message);
                 name.requestFocus();
             }
             else{
@@ -70,6 +91,8 @@ public class Dialog {
         dialog.setModal(true);
         dialog.setLocationRelativeTo(null);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        LanguageManager.update();
         dialog.setVisible(true);
 
 
