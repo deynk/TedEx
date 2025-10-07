@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,7 +144,8 @@ public class Dialog {
 
     public static void help(){
         try{
-            (new ProcessBuilder("cmd.exe", "/c","start .\\Unit3.pdf")).start();
+            //(new ProcessBuilder("cmd.exe", "/c","start .\\Unit3.pdf")).start();
+            Desktop.getDesktop().open(new File(".\\help.pdf"));
         }catch(Exception e){}
         System.out.println("Process started");
     }

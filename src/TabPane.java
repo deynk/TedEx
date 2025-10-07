@@ -206,9 +206,7 @@ public class TabPane extends JTabbedPane {
     public void paste(){
         fileEdits.get(getSelectedIndex()).text.paste();
     }
-    public void selectAll(){
-        fileEdits.get(getSelectedIndex()).text.selectAll();
-    }
+    public void selectAll(){ fileEdits.get(getSelectedIndex()).text.selectAll(); }
 
     public void checkIfCanExit(){
         while(true){

@@ -4,7 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Form {
-    // todo: traducir al valenciano y crear splash screen
+    // todo: crear opcion de buscar, buscar y remplazar
     public static JFrame frame;
     public static boolean close = false;
     public static TabPane tabs = new TabPane();
@@ -14,7 +14,7 @@ public class Form {
         frame = iniFrame(900, 600);
         frame.setVisible(false);
 
-        //Login.login();
+        Login.login();
         SplashScreen ss = new SplashScreen();
         frame.setVisible(true);
         LanguageManager.update();
