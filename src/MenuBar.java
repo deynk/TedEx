@@ -217,6 +217,35 @@ public class MenuBar  extends JMenuBar{
         selectAll.setIcon(selectAllIcon);
 
 
+
+        JMenuItem search = new JMenuItem("Search");
+        search.setToolTipText("Search text in the current file");
+        search.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
+            search.setName("menu.edit.search");
+            search.putClientProperty("tooltip", getName()+".tooltip");
+            LanguageManager.addComponent(search);
+
+        ImageIcon searchIcon = new ImageIcon("img/search.png");
+        searchIcon = new ImageIcon(searchIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        search.setIcon(searchIcon);
+
+
+
+        JMenuItem searchAndReplace = new JMenuItem("Search and replace");
+        searchAndReplace.setToolTipText("Search and replace text in the current file");
+        searchAndReplace.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_DOWN_MASK));
+        searchAndReplace.setName("menu.edit.searchAndReplace");
+        searchAndReplace.putClientProperty("tooltip", getName()+".tooltip");
+            LanguageManager.addComponent(searchAndReplace);
+
+        ImageIcon searchAndReplaceIcon = new ImageIcon("img/replace.png");
+        searchAndReplaceIcon = new ImageIcon(searchAndReplaceIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        searchAndReplace.setIcon(searchAndReplaceIcon);
+
+
+
+
+
         editMenu.add(undo);
         editMenu.add(redo);
         editMenu.addSeparator();
@@ -225,6 +254,9 @@ public class MenuBar  extends JMenuBar{
         editMenu.add(paste);
         editMenu.addSeparator();
         editMenu.add(selectAll);
+        editMenu.addSeparator();
+        editMenu.add(search);
+        editMenu.add(searchAndReplace);
 
 
 

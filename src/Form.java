@@ -14,8 +14,8 @@ public class Form {
         frame = iniFrame(900, 600);
         frame.setVisible(false);
 
-        Login.login();
-        SplashScreen ss = new SplashScreen();
+        //Login.login();
+        //SplashScreen ss = new SplashScreen();
         frame.setVisible(true);
         LanguageManager.update();
 
