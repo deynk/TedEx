@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 public class Dialog {
     private static Boolean auxiliar;
@@ -10,6 +12,14 @@ public class Dialog {
             return;
         }
         JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void Warning(String title, String message){
+        if(title == null){
+            JOptionPane.showMessageDialog(null, message, "", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
     }
 
     public static String getFileName(String fileName){
@@ -29,12 +39,30 @@ public class Dialog {
         dialog.add(cancel);
 
         ok.addActionListener((_) -> {
-            dialog.dispose();
-            // Tells to submit the name
-            auxiliar = true;
+            if(name.getText().equals("") || name.getText().isBlank()){
+                Warning("Name is empty!", "Please, insert a name for the file!");
+                name.requestFocus();
+            }
+            else{
+                dialog.dispose();
+                // Tells to submit the name
+                auxiliar = true;
+            }
         });
         dialog.getRootPane().setDefaultButton(ok);
+
         cancel.addActionListener((_) -> {dialog.dispose(); });
+        InputMap inputMap = cancel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = cancel.getActionMap();
+        KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+
+        inputMap.put(keyStroke, "cancel");
+        actionMap.put("cancel", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cancel.doClick();
+            }
+        });
 
 
         dialog.setSize(350, 100);
@@ -67,5 +95,20 @@ public class Dialog {
         dialog.setLocationRelativeTo(null);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setVisible(true);
+    }
+
+    public static void help(){
+        try{
+            (new ProcessBuilder("cmd.exe", "/c","start .\\Unit3.pdf")).start();
+        }catch(Exception e){}
+        System.out.println("Process started");
+    }
+
+    public static boolean exitWithoutSaving(){
+        //JOptionPane optionPane = new JOptionPane("You have unsaved changes. Do you want to exit?", JOptionPane.QUESTION_MESSAGE);
+        //optionPane.setOptionType(JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "You have unsaved changes. Do you want to exit?", "Unsaved changes", JOptionPane.YES_NO_OPTION);
+        if(option == JOptionPane.YES_OPTION){ System.exit(0);}
+        return false;
     }
 }

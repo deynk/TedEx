@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Form {
     public static JFrame frame;
+    public static boolean close = false;
     private static boolean userIsLogged = false;
     public static TabPane tabs = new TabPane();
 
@@ -15,6 +18,9 @@ public class Form {
         frame.setVisible(false);
         //Login.login();
         frame.setVisible(true);
+
+        // Avoid closing the app with unsaved files
+        (new Thread(() -> {tabs.checkIfCanExit();})).start();
     }
 
     private static void RefreshUI(){
@@ -38,7 +44,13 @@ public class Form {
 
         frame.setBounds(100, 100, width, height);
         frame.setSize(width, height);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() { // Avoid closing the app if it has unsaved files
+            @Override
+            public void windowClosing(WindowEvent e){
+                close = true;
+            }
+        });
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         return frame;

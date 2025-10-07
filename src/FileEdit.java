@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.undo.UndoManager;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,6 @@ public class FileEdit{
     public JTextArea text;
     public boolean saved = false;
     public UndoManager undoManager = new  UndoManager();
-    public boolean ignoreNextChange = false;
 
     public FileEdit (String Name, String path, JTextArea text){
         this.name = Name;

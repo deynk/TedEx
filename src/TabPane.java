@@ -89,7 +89,14 @@ public class TabPane extends JTabbedPane {
 
     private String getFileText(File file){
         try(BufferedReader reader = new BufferedReader(new FileReader(file))){
-            return reader.readAllAsString();
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while((line = reader.readLine()) != null){
+                sb.append(line);
+                sb.append("\n");
+            }
+            return sb.toString();
+            //return reader.readAllAsString();
         }catch(Exception e){
             Dialog.Error(null, "Can't read file");
         }
@@ -150,9 +157,9 @@ public class TabPane extends JTabbedPane {
 
         saver.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         saver.setDialogType(JFileChooser.OPEN_DIALOG);
-        saver.showOpenDialog(null);
+        int result = saver.showSaveDialog(null);
 
-        if(saver.getSelectedFile() != null){
+        if(saver.getSelectedFile() != null && result == JFileChooser.APPROVE_OPTION){
             File f = new File(saver.getSelectedFile().getAbsolutePath(), nameOfFile);
             try(BufferedWriter br = new BufferedWriter(new FileWriter(f, false))){
                 br.write(fileEdits.get(getSelectedIndex()).text.getText());
@@ -164,6 +171,7 @@ public class TabPane extends JTabbedPane {
             fileEdits.get(getSelectedIndex()).name = nameOfFile;
             fileEdits.get(getSelectedIndex()).path = (new File(saver.getSelectedFile().getAbsolutePath(), nameOfFile)).getAbsolutePath();
         }
+        else return;
 
         setTitleAt(index, fileEdits.get(getSelectedIndex()).name);
         fileEdits.get(getSelectedIndex()).saved = false;
@@ -187,5 +195,20 @@ public class TabPane extends JTabbedPane {
     }
     public void selectAll(){
         fileEdits.get(getSelectedIndex()).text.selectAll();
+    }
+
+    public void checkIfCanExit(){
+        while(true){
+            if(Form.close){
+                for(FileEdit fe : fileEdits){
+                    if(fe.saved)
+                        if(!Dialog.exitWithoutSaving()) Form.close = false;
+                }
+                if(Form.close) System.exit(0);
+            }
+            try{
+                Thread.sleep(250);
+            }catch(InterruptedException e){}
+        }
     }
 }

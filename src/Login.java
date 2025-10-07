@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.util.List;
 
@@ -36,7 +38,9 @@ public class Login {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weighty = 0.0;
-        panel.add(new JLabel("Username:  "), gbc);
+        JLabel lblUsername = new JLabel("Username:  ");
+        lblUsername.setToolTipText("Set your username");
+        panel.add(lblUsername, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -46,13 +50,26 @@ public class Login {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        panel.add(new JLabel("Password:  "), gbc);
+        JLabel lblPassword = new JLabel("Password:  ");
+        lblPassword.setToolTipText("Set your password");
+        panel.add(lblPassword, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
         JPasswordField password = new JPasswordField(16);
         password.setToolTipText("Set your password");
         panel.add(password, gbc);
+
+        password.addFocusListener(new  FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                password.selectAll();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {} //Does nothing
+        });
 
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -63,7 +80,11 @@ public class Login {
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
-        JButton loginButton = new JButton("Login");
+        //ImageIcon icoLogin = new ImageIcon((new ImageIcon("img/login.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        ImageIcon icoLogin = new ImageIcon("img/login.png");
+        Image scaled = icoLogin.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        icoLogin = new ImageIcon(scaled);
+        JButton loginButton = new JButton("Login",  icoLogin);
 
         loginButton.setToolTipText("Log in");
         dialog.getRootPane().setDefaultButton(loginButton);
