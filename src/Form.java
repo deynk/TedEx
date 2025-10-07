@@ -15,7 +15,7 @@ public class Form {
         frame.setVisible(false);
 
         //Login.login();
-
+        SplashScreen ss = new SplashScreen();
         frame.setVisible(true);
         LanguageManager.update();
 
