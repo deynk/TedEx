@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MenuBar  extends JMenuBar{
     public JMenu fileMenu;
@@ -59,15 +60,15 @@ public class MenuBar  extends JMenuBar{
         languageMenu.add(valencian);
 
         english.addActionListener((_) -> {
-            LanguageManager.locale = new Locale("en","UK");
+            LanguageManager.resourceBundle = ResourceBundle.getBundle("Language", new Locale("en", "UK"));
             LanguageManager.update();
         });
         spanish.addActionListener((_) -> {
-            LanguageManager.locale = new Locale("es","ES");
+            LanguageManager.resourceBundle = ResourceBundle.getBundle("Language", new Locale("es", "ES"));
             LanguageManager.update();
         });
         valencian.addActionListener((_) -> {
-            LanguageManager.locale = new Locale("vl","VL");
+            LanguageManager.resourceBundle = ResourceBundle.getBundle("Language", new Locale("vl", "VL"));
             LanguageManager.update();
         });
 

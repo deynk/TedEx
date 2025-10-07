@@ -10,7 +10,9 @@ public class LanguageManager {
     public static List<Object> components = new ArrayList<Object>();
 
     public static void addComponent(Object component) { components.add(component); }
-    public static void update(){ updateComponents(); }
+    public static void update(){
+        System.out.println(locale);
+        updateComponents(); }
     public static void updateComponents() {
         updateComponents(components);
     }

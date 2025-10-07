@@ -4,6 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Form {
+    // todo: traducir al valenciano y crear splash screen
     public static JFrame frame;
     public static boolean close = false;
     public static TabPane tabs = new TabPane();
